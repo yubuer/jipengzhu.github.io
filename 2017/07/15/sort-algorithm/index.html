@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="排序算法c语言版一、插入排序基本原理 将一个纪录从后往前依次与有序表的元素比较，如果有序表的元素大，则往后移，否则将纪录插入到这个有序表纪录的后面  代码如下： 复杂度计算 复杂度分析：循环次数（n - 1）* (n - 1) = n2 - 2n - 1， n非常大时近似于n2时间复杂度：O(n2)  二、希尔插入排序（Shell‘s Sort）基本原理 希尔排序是1959 年由D.L.Shell">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sort_algorithm">
+<meta property="og:url" content="http://yoursite.com/2017/07/15/sort-algorithm/index.html">
+<meta property="og:site_name" content="朱继鹏的博客">
+<meta property="og:description" content="排序算法c语言版一、插入排序基本原理 将一个纪录从后往前依次与有序表的元素比较，如果有序表的元素大，则往后移，否则将纪录插入到这个有序表纪录的后面  代码如下： 复杂度计算 复杂度分析：循环次数（n - 1）* (n - 1) = n2 - 2n - 1， n非常大时近似于n2时间复杂度：O(n2)  二、希尔插入排序（Shell‘s Sort）基本原理 希尔排序是1959 年由D.L.Shell">
+<meta property="og:updated_time" content="2017-07-15T18:41:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sort_algorithm">
+<meta name="twitter:description" content="排序算法c语言版一、插入排序基本原理 将一个纪录从后往前依次与有序表的元素比较，如果有序表的元素大，则往后移，否则将纪录插入到这个有序表纪录的后面  代码如下： 复杂度计算 复杂度分析：循环次数（n - 1）* (n - 1) = n2 - 2n - 1， n非常大时近似于n2时间复杂度：O(n2)  二、希尔插入排序（Shell‘s Sort）基本原理 希尔排序是1959 年由D.L.Shell">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/15/sort-algorithm/"/>
+
+
+
+
+
+  <title>sort_algorithm | 朱继鹏的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朱继鹏的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">全栈都停</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/sort-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱继鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朱继鹏的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sort_algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-15T20:44:00+08:00">
+                2017-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="排序算法c语言版"><a href="#排序算法c语言版" class="headerlink" title="排序算法c语言版"></a>排序算法c语言版</h1><h2 id="一、插入排序"><a href="#一、插入排序" class="headerlink" title="一、插入排序"></a>一、插入排序</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>将一个纪录从后往前依次与有序表的元素比较，如果有序表的元素大，则往后移，否则将纪录插入到这个有序表纪录的后面</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=insert_sort.c"></script></p>
+<h3 id="复杂度计算"><a href="#复杂度计算" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>复杂度分析：循环次数（n - 1）* (n - 1) = n<sup>2</sup> - 2n - 1， n非常大时近似于n<sup>2</sup><br>时间复杂度：O(n<sup>2</sup>)</p>
+</blockquote>
+<h2 id="二、希尔插入排序（Shell‘s-Sort）"><a href="#二、希尔插入排序（Shell‘s-Sort）" class="headerlink" title="二、希尔插入排序（Shell‘s Sort）"></a>二、希尔插入排序（Shell‘s Sort）</h2><h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>希尔排序是1959 年由D.L.Shell 提出来的，相对直接排序有较大的改进。希尔排序又叫缩小增量排序</p>
+<ol>
+<li>选择一个增量序列t1，t2，…，tk，其中ti&gt;tj，tk=1</li>
+<li>根据对应的增量ti，将待排序列分割成若干长度为m的子序列，分别对各子表进行直接插入排序</li>
+<li>仅增量因子为1时，整个序列作为一个表来处理，表长度即为整个序列的长度</li>
+</ol>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=shell_insert_sort.c"></script></p>
+<h3 id="复杂度计算-1"><a href="#复杂度计算-1" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>时间复杂度：受增量因子d的影响，希尔排序的时效分析很难，是不稳定的排序方法</p>
+</blockquote>
+<h2 id="三、简单选择排序"><a href="#三、简单选择排序" class="headerlink" title="三、简单选择排序"></a>三、简单选择排序</h2><h3 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>在要排序的一组数中，选出最小（或者最大）的一个数与第1个位置的数交换；然后在剩下的数当中再找最小（或者最大）的与第2个位置的数交换，依次类推，直到第n-1个元素（倒数第二个数）和第n个元素（最后一个数）比较为止</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=simple_select_sort.c"></script></p>
+<h3 id="复杂度计算-2"><a href="#复杂度计算-2" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>复杂度分析：循环次数（n - 1）* (n - 1) = n<sup>2</sup> - 2n - 1， n非常大时近似于n<sup>2</sup><br>时间复杂度：O(n<sup>2</sup>)</p>
+</blockquote>
+<h2 id="四、二元选择排序"><a href="#四、二元选择排序" class="headerlink" title="四、二元选择排序"></a>四、二元选择排序</h2><h3 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>简单选择排序，每趟循环只能确定一个元素排序后的定位。我们可以考虑改进为每趟循环确定两个元素（当前趟最大和最小记录）的位置,从而减少排序所需的循环次数。改进后对n个数据进行排序，最多只需进行[n/2]趟循环即可</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=dual_select_sort.c"></script></p>
+<h3 id="复杂度计算-3"><a href="#复杂度计算-3" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>复杂度分析：循环次数（n - 1）* (n - 1) / 2 = (n<sup>2</sup> - 2n - 1) / 2， n非常大时近似于n ^ 2 / 2<br>时间复杂度：O(n<sup>2</sup> / 2)</p>
+</blockquote>
+<h2 id="五、大堆选择排序"><a href="#五、大堆选择排序" class="headerlink" title="五、大堆选择排序"></a>五、大堆选择排序</h2><h3 id="基本原理-4"><a href="#基本原理-4" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>初始时把要排序的n个数的序列看作是一棵顺序存储的二叉树（一维数组存储二叉树），调整它们的存储序，使之成为一个堆，将堆顶元素输出，得到n个元素中最小(或最大)的元素，这时堆的根节点的数最小（或者最大）。然后对前面(n-1)个元素重新调整使之成为堆，输出堆顶元素，得到n个元素中次小(或次大)的元素。依此类推，直到只有两个节点的堆，并对它们作交换，最后得到有n个节点的有序序列。称这个过程为堆排序</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=heap_select_sort.c"></script></p>
+<h3 id="复杂度计算-4"><a href="#复杂度计算-4" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>复杂度分析：设树深度为k，k = (log<sub>2</sub>n) + 1从根到叶的筛选，元素比较次数至多2(k-1)次，交换记录至多k次。所以，在建好堆后，排序过程中的筛选次数不超过下式： log<sub>2</sub>n - 1 + log<sub>2</sub>n - 2 + … + log<sub>2</sub>2 &lt; 2n(log<sub>2</sub>n)而建堆时的比较次数不超过4n次，因此堆排序最坏情况下，时间复杂度也为：O(nlog<sub>2</sub>n)<br>时间复杂度：O(nlog<sub>2</sub>n)</p>
+</blockquote>
+<h2 id="六、交换排序—冒泡排序"><a href="#六、交换排序—冒泡排序" class="headerlink" title="六、交换排序—冒泡排序"></a>六、交换排序—冒泡排序</h2><h3 id="基本原理-5"><a href="#基本原理-5" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>在要排序的一组数中，对当前还未排好序的范围内的全部数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=bubble_sort.c"></script></p>
+<h3 id="复杂度计算-5"><a href="#复杂度计算-5" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>时间复杂度：O(n<sup>2</sup>)</p>
+</blockquote>
+<h2 id="七、交换排序—快速排序"><a href="#七、交换排序—快速排序" class="headerlink" title="七、交换排序—快速排序"></a>七、交换排序—快速排序</h2><h3 id="基本原理-6"><a href="#基本原理-6" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<ol>
+<li>选择一个基准元素,通常选择第一个元素或者最后一个元素,</li>
+<li>通过一趟排序讲待排序的记录分割成独立的两部分，其中一部分记录的元素值均比基准元素值小。另一部分记录的 元素值比基准值大。</li>
+<li>此时基准元素在其排好序后的正确位置</li>
+<li>然后分别对这两部分记录用同样的方法继续进行排序，直到整个序列有序</li>
+</ol>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=quick_sort.c"></script></p>
+<h3 id="复杂度计算-6"><a href="#复杂度计算-6" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>复杂度分析：快速排序是通常被认为在同数量级（O(nlog<sub>2</sub>n)）的排序方法中平均性能最好的。但若初始序列按关键码有序或基本有序时，快排序反而蜕化为冒泡排序。为改进之，通常以“三者取中法”来选取基准记录，即将排序区间的两个端点与中点三个记录关键码居中的调整为支点记录。快速排序是一个不稳定的排序方法。<br>时间复杂度：O(nlog<sub>2</sub>n)</p>
+</blockquote>
+<h2 id="八、归并排序"><a href="#八、归并排序" class="headerlink" title="八、归并排序"></a>八、归并排序</h2><h3 id="基本原理-7"><a href="#基本原理-7" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
+<p>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列</p>
+</blockquote>
+<p>代码如下：<br><script src="//gist.github.com/ee19cbc41c613e0cddf4fc71b1c5f789.js?file=merge_sort.c"></script></p>
+<h3 id="复杂度计算-7"><a href="#复杂度计算-7" class="headerlink" title="复杂度计算"></a>复杂度计算</h3><blockquote>
+<p>时间复杂度：O(nlog<sub>2</sub>n)</p>
+</blockquote>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/hguisu/article/details/7776068" target="_blank" rel="external">八大排序算法</a><br><a href="http://blog.csdn.net/morewindows/article/details/6678165" target="_blank" rel="external">归并排序</a><br><a href="http://www.jianshu.com/p/d7f45b4c5e37" target="_blank" rel="external">桶排序和基数排序</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/08/Welcome/" rel="next" title="Welcome to zhujipeng's world">
+                <i class="fa fa-chevron-left"></i> Welcome to zhujipeng's world
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="朱继鹏" />
+          <p class="site-author-name" itemprop="name">朱继鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">在全栈的路上狂奔</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#排序算法c语言版"><span class="nav-number">1.</span> <span class="nav-text">排序算法c语言版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、插入排序"><span class="nav-number">1.1.</span> <span class="nav-text">一、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算"><span class="nav-number">1.1.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、希尔插入排序（Shell‘s-Sort）"><span class="nav-number">1.2.</span> <span class="nav-text">二、希尔插入排序（Shell‘s Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、简单选择排序"><span class="nav-number">1.3.</span> <span class="nav-text">三、简单选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、二元选择排序"><span class="nav-number">1.4.</span> <span class="nav-text">四、二元选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、大堆选择排序"><span class="nav-number">1.5.</span> <span class="nav-text">五、大堆选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、交换排序—冒泡排序"><span class="nav-number">1.6.</span> <span class="nav-text">六、交换排序—冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、交换排序—快速排序"><span class="nav-number">1.7.</span> <span class="nav-text">七、交换排序—快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、归并排序"><span class="nav-number">1.8.</span> <span class="nav-text">八、归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度计算-7"><span class="nav-number">1.8.2.</span> <span class="nav-text">复杂度计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱继鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
